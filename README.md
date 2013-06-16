@@ -5,8 +5,8 @@ of MLB statistics.
 
 Requirements
 ------------
-[MySQL](https://www.mysql.com/)
-[Lahman's Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/)
+* [MySQL](https://www.mysql.com/)
+* [Lahman's Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/)
 
 Usage
 -----
