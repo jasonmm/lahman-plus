@@ -313,6 +313,33 @@ CREATE TABLE `fielding` (
 
 
 
+# Dump of table fieldingofsplit
+# ------------------------------------------------------------
+
+CREATE TABLE `fieldingofsplit` (
+	  `playerID` varchar(9) NOT NULL DEFAULT '',
+	  `yearID` int(11) DEFAULT NULL,
+	  `stint` int(11) DEFAULT NULL,
+	  `teamID` varchar(3) DEFAULT NULL,
+	  `lgID` varchar(2) DEFAULT NULL,
+	  `POS` varchar(2) DEFAULT NULL,
+	  `G` int(11) DEFAULT NULL,
+	  `GS` int(11) DEFAULT NULL,
+	  `InnOuts` int(11) DEFAULT NULL,
+	  `PO` int(11) DEFAULT NULL,
+	  `A` int(11) DEFAULT NULL,
+	  `E` int(11) DEFAULT NULL,
+	  `DP` int(11) DEFAULT NULL,
+	  `PB` int(11) DEFAULT NULL,
+	  `WP` int(11) DEFAULT NULL,
+	  `SB` int(11) DEFAULT NULL,
+	  `CS` int(11) DEFAULT NULL,
+	  `ZR` double DEFAULT NULL,
+	  PRIMARY KEY (`playerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 # Dump of table fieldingof
 # ------------------------------------------------------------
 
