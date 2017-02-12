@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Usage: ./install.sh
+#
 
 # We need the root password throughout so we prompt the user for it here.
 read -s -p "Enter MySQL root user password: " rootpwd
@@ -22,61 +25,27 @@ else
 	git pull origin master
 fi
 
-# Import the data into the 'lahman' database.
+# Create the database and tables.
 cd core
-echo "  ...importing..."
+echo "Creating the database..."
 mysql -u root -p$rootpwd -e "DROP DATABASE IF EXISTS lahman"
 mysql -u root -p$rootpwd -e "CREATE DATABASE lahman"
 mysql -u root -p$rootpwd lahman < ../../lahman-create-tables.sql || exit $?
+
+# Import the data into the 'lahman' database.
+# Only CSV files contain data so non-CSV files are ignored.
+# The table name is the lowercased filename (sans extension).
+echo "Importing the data..."
 for filename in *; do 
 	if [ $(echo "$filename" | cut -d. -f2) = "csv" ]; then
 		tablename=$(echo "$filename" | tr '[:upper:]' '[:lower:]' | cut -d. -f1)
+	else
+		continue
 	fi
 	mysql -u root -p$rootpwd lahman \
 		-e "LOAD DATA INFILE '`pwd`/$filename' REPLACE INTO TABLE $tablename FIELDS TERMINATED BY ',' IGNORE 1 LINES" || exit $?
 done
 cd ../..
-#rm -rf baseballdatabank
-
-# Add indexes. We use MySQL's "force" option to move past indexes 
-# that already exist.
-echo "Adding missing indexes (ignore duplicate errors)..."
-mysql --force -u root -p$rootpwd lahman < create-indexes.sql || exit $?
-
-# Create franchises batting statistics
-#echo "Creating franchises batting stats..."
-#mysql -u root -p$rootpwd lahman < franchises.sql || exit $?
-
-# Create league batting statistics.
-#echo "Creating league batting stats..."
-#mysql -u root -p$rootpwd lahman < lgbatting.sql || exit $?
-
-# Calculate player statistics.
-# MySQL's "force" option is used here to skip past ALTER TABLE's 
-# "column exists" errors.
-#echo "Calculating player yearly averages..."
-#mysql --force -u root -p$rootpwd lahman < calculate-batting-percentages.sql || exit $?
-
-#echo "Creating player career statistics..."
-#mysql -u root -p$rootpwd lahman < battingcareer.sql || exit $?
-
-# Calculating LMBCI cannot be done with a simple query.  So we use a for loop
-# to run the query for every player in the "battingcareer" table.
-players=$(mysql -u root -p$rootpwd lahman -Bse "SELECT playerID FROM battingcareer;")
-# Read in the SQL that calculates career LMBCI for a specific player.  This
-# for loop does a '$lmbciSql = get_file_contents("battingcareer-lmbci.sql")'.
-#set -f
-#lmbciSql=""
-#for line in $(cat "battingcareer-lmbci.sql" | tr -c "[:print:]" " ")
-#do
-#	lmbciSql="${lmbciSql} $line"
-#done
-## For each player calculate their career LMBCI.
-#for playerId in $players; do 
-#	sql=${lmbciSql//\?/$playerId}
-#	mysql -u root -p$rootpwd lahman -Bse "$sql"
-#done
-
 
 echo "Finished."
 
