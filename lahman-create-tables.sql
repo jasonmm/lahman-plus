@@ -1,37 +1,35 @@
+--
+-- Table structure for table `allstarfull`
+--
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table allstarfull
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `allstarfull`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `allstarfull` (
-  `playerID` varchar(9) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `gameNum` int(11) DEFAULT NULL,
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `gameNum` int(11) NOT NULL DEFAULT '0',
   `gameID` varchar(12) DEFAULT '',
   `teamID` varchar(3) DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
   `GP` int(11) DEFAULT NULL,
-  `startingPos` int(11) DEFAULT NULL
+  `startingPos` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`gameNum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `appearances`
+--
 
-
-# Dump of table appearances
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `appearances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `appearances` (
-  `yearID` int(11) DEFAULT NULL,
-  `teamID` varchar(3) DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `teamID` varchar(3) NOT NULL DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
-  `playerID` varchar(9) DEFAULT '',
+  `playerID` varchar(9) NOT NULL DEFAULT '',
   `G_all` int(11) DEFAULT NULL,
   `GS` int(11) DEFAULT NULL,
   `G_batting` int(11) DEFAULT NULL,
@@ -48,72 +46,92 @@ CREATE TABLE `appearances` (
   `G_of` int(11) DEFAULT NULL,
   `G_dh` int(11) DEFAULT NULL,
   `G_ph` int(11) DEFAULT NULL,
-  `G_pr` int(11) DEFAULT NULL
+  `G_pr` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`teamID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `awardsmanagers`
+--
 
-
-# Dump of table awardsmanagers
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `awardsmanagers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `awardsmanagers` (
-  `playerID` varchar(10) DEFAULT '',
-  `awardID` varchar(75) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `lgID` varchar(2) DEFAULT '',
+  `playerID` varchar(10) NOT NULL DEFAULT '',
+  `awardID` varchar(75) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `lgID` varchar(2) NOT NULL DEFAULT '',
   `tie` varchar(1) DEFAULT '',
-  `notes` text
+  `notes` text,
+  PRIMARY KEY (`playerID`,`awardID`,`yearID`,`lgID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `awardsplayers`
+--
 
-
-# Dump of table awardsplayers
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `awardsplayers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `awardsplayers` (
-  `playerID` varchar(9) DEFAULT '',
-  `awardID` varchar(255) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `lgID` varchar(2) DEFAULT '',
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `awardID` varchar(255) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `lgID` varchar(2) NOT NULL DEFAULT '',
   `tie` varchar(1) DEFAULT '',
-  `notes` text
+  `notes` text,
+  PRIMARY KEY (`playerID`,`awardID`,`yearID`,`lgID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `awardssharemanagers`
+--
 
-
-# Dump of table awardssharemanagers
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `awardssharemanagers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `awardssharemanagers` (
-  `awardID` varchar(25) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `lgID` varchar(2) DEFAULT '',
-  `playerID` varchar(10) DEFAULT '',
+  `awardID` varchar(25) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `lgID` varchar(2) NOT NULL DEFAULT '',
+  `playerID` varchar(10) NOT NULL DEFAULT '',
   `pointsWon` int(11) DEFAULT NULL,
   `pointsMax` int(11) DEFAULT NULL,
-  `votesFirst` int(11) DEFAULT NULL
+  `votesFirst` int(11) DEFAULT NULL,
+  PRIMARY KEY (`awardID`,`yearID`,`lgID`,`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `awardsshareplayers`
+--
 
-
-# Dump of table awardsshareplayers
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `awardsshareplayers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `awardsshareplayers` (
-  `awardID` varchar(25) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `lgID` varchar(2) DEFAULT '',
-  `playerID` varchar(9) DEFAULT '',
+  `awardID` varchar(25) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `lgID` varchar(2) NOT NULL DEFAULT '',
+  `playerID` varchar(9) NOT NULL DEFAULT '',
   `pointsWon` int(11) DEFAULT NULL,
   `pointsMax` int(11) DEFAULT NULL,
-  `votesFirst` int(11) DEFAULT NULL
+  `votesFirst` int(11) DEFAULT NULL,
+  PRIMARY KEY (`awardID`,`yearID`,`lgID`,`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `batting`
+--
 
-
-# Dump of table batting
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `batting`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `batting` (
   `playerID` varchar(9) NOT NULL DEFAULT '',
   `yearID` int(11) NOT NULL,
@@ -139,120 +157,139 @@ CREATE TABLE `batting` (
   `GIDP` int(11) DEFAULT NULL,
   PRIMARY KEY (`playerID`,`yearID`,`stint`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Temporary table structure for view `battingcareer`
+--
 
+DROP TABLE IF EXISTS `battingcareer`;
+/*!50001 DROP VIEW IF EXISTS `battingcareer`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `battingcareer` (
+  `playerID` tinyint NOT NULL,
+  `G` tinyint NOT NULL,
+  `PA` tinyint NOT NULL,
+  `AB` tinyint NOT NULL,
+  `R` tinyint NOT NULL,
+  `H` tinyint NOT NULL,
+  `1B` tinyint NOT NULL,
+  `2B` tinyint NOT NULL,
+  `3B` tinyint NOT NULL,
+  `HR` tinyint NOT NULL,
+  `RBI` tinyint NOT NULL,
+  `SB` tinyint NOT NULL,
+  `CS` tinyint NOT NULL,
+  `BB` tinyint NOT NULL,
+  `SO` tinyint NOT NULL,
+  `IBB` tinyint NOT NULL,
+  `HBP` tinyint NOT NULL,
+  `SH` tinyint NOT NULL,
+  `SF` tinyint NOT NULL,
+  `GIDP` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dump of table battingcareer
-# ------------------------------------------------------------
+--
+-- Temporary table structure for view `battingleague`
+--
 
-CREATE TABLE `battingcareer` (
-   `playerID` VARCHAR(9) NOT NULL DEFAULT '',
-   `G` DECIMAL(32) NULL DEFAULT NULL,
-   `PA` DECIMAL(37) NULL DEFAULT NULL,
-   `AB` DECIMAL(32) NULL DEFAULT NULL,
-   `R` DECIMAL(32) NULL DEFAULT NULL,
-   `H` DECIMAL(32) NULL DEFAULT NULL,
-   `1B` DECIMAL(35) NULL DEFAULT NULL,
-   `2B` DECIMAL(32) NULL DEFAULT NULL,
-   `3B` DECIMAL(32) NULL DEFAULT NULL,
-   `HR` DECIMAL(32) NULL DEFAULT NULL,
-   `RBI` DECIMAL(32) NULL DEFAULT NULL,
-   `SB` DECIMAL(32) NULL DEFAULT NULL,
-   `CS` DECIMAL(32) NULL DEFAULT NULL,
-   `BB` DECIMAL(32) NULL DEFAULT NULL,
-   `SO` DECIMAL(32) NULL DEFAULT NULL,
-   `IBB` DECIMAL(32) NULL DEFAULT NULL,
-   `HBP` DECIMAL(32) NULL DEFAULT NULL,
-   `SH` DECIMAL(32) NULL DEFAULT NULL,
-   `SF` DECIMAL(32) NULL DEFAULT NULL,
-   `GIDP` DECIMAL(32) NULL DEFAULT NULL
-) ENGINE=MyISAM;
+DROP TABLE IF EXISTS `battingleague`;
+/*!50001 DROP VIEW IF EXISTS `battingleague`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `battingleague` (
+  `lgID` tinyint NOT NULL,
+  `yearID` tinyint NOT NULL,
+  `AB` tinyint NOT NULL,
+  `R` tinyint NOT NULL,
+  `H` tinyint NOT NULL,
+  `2B` tinyint NOT NULL,
+  `3B` tinyint NOT NULL,
+  `HR` tinyint NOT NULL,
+  `RBI` tinyint NOT NULL,
+  `SB` tinyint NOT NULL,
+  `CS` tinyint NOT NULL,
+  `BB` tinyint NOT NULL,
+  `SO` tinyint NOT NULL,
+  `IBB` tinyint NOT NULL,
+  `HBP` tinyint NOT NULL,
+  `SH` tinyint NOT NULL,
+  `SF` tinyint NOT NULL,
+  `GIDP` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
+--
+-- Temporary table structure for view `battingmlbperyear`
+--
 
+DROP TABLE IF EXISTS `battingmlbperyear`;
+/*!50001 DROP VIEW IF EXISTS `battingmlbperyear`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `battingmlbperyear` (
+  `yearID` tinyint NOT NULL,
+  `AB` tinyint NOT NULL,
+  `R` tinyint NOT NULL,
+  `H` tinyint NOT NULL,
+  `2B` tinyint NOT NULL,
+  `3B` tinyint NOT NULL,
+  `HR` tinyint NOT NULL,
+  `RBI` tinyint NOT NULL,
+  `SB` tinyint NOT NULL,
+  `CS` tinyint NOT NULL,
+  `BB` tinyint NOT NULL,
+  `SO` tinyint NOT NULL,
+  `IBB` tinyint NOT NULL,
+  `HBP` tinyint NOT NULL,
+  `SH` tinyint NOT NULL,
+  `SF` tinyint NOT NULL,
+  `GIDP` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dump of table battingleague
-# ------------------------------------------------------------
+--
+-- Temporary table structure for view `battingperpamlbperyear`
+--
 
-CREATE TABLE `battingleague` (
-   `lgID` VARCHAR(2) NULL DEFAULT '',
-   `yearID` INT(11) NOT NULL,
-   `AB` DECIMAL(32) NULL DEFAULT NULL,
-   `R` DECIMAL(32) NULL DEFAULT NULL,
-   `H` DECIMAL(32) NULL DEFAULT NULL,
-   `2B` DECIMAL(32) NULL DEFAULT NULL,
-   `3B` DECIMAL(32) NULL DEFAULT NULL,
-   `HR` DECIMAL(32) NULL DEFAULT NULL,
-   `RBI` DECIMAL(32) NULL DEFAULT NULL,
-   `SB` DECIMAL(32) NULL DEFAULT NULL,
-   `CS` DECIMAL(32) NULL DEFAULT NULL,
-   `BB` DECIMAL(32) NULL DEFAULT NULL,
-   `SO` DECIMAL(32) NULL DEFAULT NULL,
-   `IBB` DECIMAL(32) NULL DEFAULT NULL,
-   `HBP` DECIMAL(32) NULL DEFAULT NULL,
-   `SH` DECIMAL(32) NULL DEFAULT NULL,
-   `SF` DECIMAL(32) NULL DEFAULT NULL,
-   `GIDP` DECIMAL(32) NULL DEFAULT NULL
-) ENGINE=MyISAM;
+DROP TABLE IF EXISTS `battingperpamlbperyear`;
+/*!50001 DROP VIEW IF EXISTS `battingperpamlbperyear`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `battingperpamlbperyear` (
+  `yearid` tinyint NOT NULL,
+  `pa` tinyint NOT NULL,
+  `ab` tinyint NOT NULL,
+  `h` tinyint NOT NULL,
+  `1b` tinyint NOT NULL,
+  `2b` tinyint NOT NULL,
+  `3b` tinyint NOT NULL,
+  `hr` tinyint NOT NULL,
+  `sb` tinyint NOT NULL,
+  `cs` tinyint NOT NULL,
+  `bb` tinyint NOT NULL,
+  `so` tinyint NOT NULL,
+  `ibb` tinyint NOT NULL,
+  `hbp` tinyint NOT NULL,
+  `sh` tinyint NOT NULL,
+  `sf` tinyint NOT NULL,
+  `gidp` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
+--
+-- Table structure for table `battingpost`
+--
 
-
-# Dump of table battingmlbperyear
-# ------------------------------------------------------------
-
-CREATE TABLE `battingmlbperyear` (
-   `yearID` INT(11) NOT NULL,
-   `AB` DECIMAL(32) NULL DEFAULT NULL,
-   `R` DECIMAL(32) NULL DEFAULT NULL,
-   `H` DECIMAL(32) NULL DEFAULT NULL,
-   `2B` DECIMAL(32) NULL DEFAULT NULL,
-   `3B` DECIMAL(32) NULL DEFAULT NULL,
-   `HR` DECIMAL(32) NULL DEFAULT NULL,
-   `RBI` DECIMAL(32) NULL DEFAULT NULL,
-   `SB` DECIMAL(32) NULL DEFAULT NULL,
-   `CS` DECIMAL(32) NULL DEFAULT NULL,
-   `BB` DECIMAL(32) NULL DEFAULT NULL,
-   `SO` DECIMAL(32) NULL DEFAULT NULL,
-   `IBB` DECIMAL(32) NULL DEFAULT NULL,
-   `HBP` DECIMAL(32) NULL DEFAULT NULL,
-   `SH` DECIMAL(32) NULL DEFAULT NULL,
-   `SF` DECIMAL(32) NULL DEFAULT NULL,
-   `GIDP` DECIMAL(32) NULL DEFAULT NULL
-) ENGINE=MyISAM;
-
-
-
-# Dump of table battingperpamlbperyear
-# ------------------------------------------------------------
-
-CREATE TABLE `battingperpamlbperyear` (
-   `yearid` INT(11) NOT NULL,
-   `pa` DECIMAL(37) NULL DEFAULT NULL,
-   `ab` DECIMAL(32) NULL DEFAULT NULL,
-   `h` DECIMAL(32) NULL DEFAULT NULL,
-   `1b` DECIMAL(39) NULL DEFAULT NULL,
-   `2b` DECIMAL(36) NULL DEFAULT NULL,
-   `3b` DECIMAL(36) NULL DEFAULT NULL,
-   `hr` DECIMAL(36) NULL DEFAULT NULL,
-   `sb` DECIMAL(36) NULL DEFAULT NULL,
-   `cs` DECIMAL(36) NULL DEFAULT NULL,
-   `bb` DECIMAL(36) NULL DEFAULT NULL,
-   `so` DECIMAL(36) NULL DEFAULT NULL,
-   `ibb` DECIMAL(36) NULL DEFAULT NULL,
-   `hbp` DECIMAL(36) NULL DEFAULT NULL,
-   `sh` DECIMAL(36) NULL DEFAULT NULL,
-   `sf` DECIMAL(36) NULL DEFAULT NULL,
-   `gidp` DECIMAL(36) NULL DEFAULT NULL
-) ENGINE=MyISAM;
-
-
-
-# Dump of table battingpost
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `battingpost`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `battingpost` (
-  `yearID` int(11) DEFAULT NULL,
-  `round` varchar(10) DEFAULT '',
-  `playerID` varchar(9) DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `round` varchar(10) NOT NULL DEFAULT '',
+  `playerID` varchar(9) NOT NULL DEFAULT '',
   `teamID` varchar(3) DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
   `G` int(11) DEFAULT NULL,
@@ -271,32 +308,40 @@ CREATE TABLE `battingpost` (
   `HBP` int(11) DEFAULT NULL,
   `SH` int(11) DEFAULT NULL,
   `SF` int(11) DEFAULT NULL,
-  `GIDP` text
+  `GIDP` text,
+  PRIMARY KEY (`yearID`,`round`,`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `collegeplaying`
+--
 
-
-# Dump of table collegeplaying
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `collegeplaying`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `collegeplaying` (
-  `playerID` varchar(9) DEFAULT '',
-  `schoolID` varchar(15) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `schoolID` varchar(15) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`playerID`,`schoolID`,`yearID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `fielding`
+--
 
-
-# Dump of table fielding
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `fielding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fielding` (
-  `playerID` varchar(9) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `stint` int(11) DEFAULT NULL,
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `stint` int(11) NOT NULL DEFAULT '0',
   `teamID` varchar(3) DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
-  `POS` varchar(2) DEFAULT '',
+  `POS` varchar(2) NOT NULL DEFAULT '',
   `G` int(11) DEFAULT NULL,
   `GS` int(11) DEFAULT NULL,
   `InnOuts` int(11) DEFAULT NULL,
@@ -308,62 +353,73 @@ CREATE TABLE `fielding` (
   `WP` int(11) DEFAULT NULL,
   `SB` int(11) DEFAULT NULL,
   `CS` int(11) DEFAULT NULL,
-  `ZR` double DEFAULT NULL
+  `ZR` double DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`stint`,`POS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `fieldingof`
+--
 
-
-# Dump of table fieldingofsplit
-# ------------------------------------------------------------
-
-CREATE TABLE `fieldingofsplit` (
-	  `playerID` varchar(9) NOT NULL DEFAULT '',
-	  `yearID` int(11) DEFAULT NULL,
-	  `stint` int(11) DEFAULT NULL,
-	  `teamID` varchar(3) DEFAULT NULL,
-	  `lgID` varchar(2) DEFAULT NULL,
-	  `POS` varchar(2) DEFAULT NULL,
-	  `G` int(11) DEFAULT NULL,
-	  `GS` int(11) DEFAULT NULL,
-	  `InnOuts` int(11) DEFAULT NULL,
-	  `PO` int(11) DEFAULT NULL,
-	  `A` int(11) DEFAULT NULL,
-	  `E` int(11) DEFAULT NULL,
-	  `DP` int(11) DEFAULT NULL,
-	  `PB` int(11) DEFAULT NULL,
-	  `WP` int(11) DEFAULT NULL,
-	  `SB` int(11) DEFAULT NULL,
-	  `CS` int(11) DEFAULT NULL,
-	  `ZR` double DEFAULT NULL,
-	  PRIMARY KEY (`playerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-# Dump of table fieldingof
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `fieldingof`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldingof` (
-  `playerID` varchar(9) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `stint` int(11) DEFAULT NULL,
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `stint` int(11) NOT NULL DEFAULT '0',
   `Glf` int(11) DEFAULT NULL,
   `Gcf` int(11) DEFAULT NULL,
-  `Grf` int(11) DEFAULT NULL
+  `Grf` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`stint`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `fieldingofsplit`
+--
 
-
-# Dump of table fieldingpost
-# ------------------------------------------------------------
-
-CREATE TABLE `fieldingpost` (
-  `playerID` varchar(9) DEFAULT '',
+DROP TABLE IF EXISTS `fieldingofsplit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fieldingofsplit` (
+  `playerID` varchar(9) NOT NULL DEFAULT '',
   `yearID` int(11) DEFAULT NULL,
+  `stint` int(11) DEFAULT NULL,
+  `teamID` varchar(3) DEFAULT NULL,
+  `lgID` varchar(2) DEFAULT NULL,
+  `POS` varchar(2) DEFAULT NULL,
+  `G` int(11) DEFAULT NULL,
+  `GS` int(11) DEFAULT NULL,
+  `InnOuts` int(11) DEFAULT NULL,
+  `PO` int(11) DEFAULT NULL,
+  `A` int(11) DEFAULT NULL,
+  `E` int(11) DEFAULT NULL,
+  `DP` int(11) DEFAULT NULL,
+  `PB` int(11) DEFAULT NULL,
+  `WP` int(11) DEFAULT NULL,
+  `SB` int(11) DEFAULT NULL,
+  `CS` int(11) DEFAULT NULL,
+  `ZR` double DEFAULT NULL,
+  PRIMARY KEY (`playerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `fieldingpost`
+--
+
+DROP TABLE IF EXISTS `fieldingpost`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fieldingpost` (
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
   `teamID` varchar(3) DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
-  `round` varchar(10) DEFAULT '',
-  `POS` varchar(2) DEFAULT '',
+  `round` varchar(10) NOT NULL DEFAULT '',
+  `POS` varchar(2) NOT NULL DEFAULT '',
   `G` int(11) DEFAULT NULL,
   `GS` int(11) DEFAULT NULL,
   `InnOuts` int(11) DEFAULT NULL,
@@ -374,52 +430,60 @@ CREATE TABLE `fieldingpost` (
   `TP` int(11) DEFAULT NULL,
   `PB` int(11) DEFAULT NULL,
   `SB` int(11) DEFAULT NULL,
-  `CS` int(11) DEFAULT NULL
+  `CS` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`round`,`POS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Temporary table structure for view `franchises`
+--
 
+DROP TABLE IF EXISTS `franchises`;
+/*!50001 DROP VIEW IF EXISTS `franchises`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `franchises` (
+  `franchID` tinyint NOT NULL,
+  `G` tinyint NOT NULL,
+  `Ghome` tinyint NOT NULL,
+  `W` tinyint NOT NULL,
+  `L` tinyint NOT NULL,
+  `DivWin` tinyint NOT NULL,
+  `LgWin` tinyint NOT NULL,
+  `WSWin` tinyint NOT NULL,
+  `WCWin` tinyint NOT NULL,
+  `R` tinyint NOT NULL,
+  `AB` tinyint NOT NULL,
+  `H` tinyint NOT NULL,
+  `2B` tinyint NOT NULL,
+  `3B` tinyint NOT NULL,
+  `HR` tinyint NOT NULL,
+  `BB` tinyint NOT NULL,
+  `SO` tinyint NOT NULL,
+  `SB` tinyint NOT NULL,
+  `CS` tinyint NOT NULL,
+  `HBP` tinyint NOT NULL,
+  `SF` tinyint NOT NULL,
+  `RA` tinyint NOT NULL,
+  `ER` tinyint NOT NULL,
+  `CG` tinyint NOT NULL,
+  `SHO` tinyint NOT NULL,
+  `SV` tinyint NOT NULL,
+  `IPouts` tinyint NOT NULL,
+  `E` tinyint NOT NULL,
+  `DB` tinyint NOT NULL,
+  `attendance` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dump of table franchises
-# ------------------------------------------------------------
+--
+-- Table structure for table `guts`
+--
 
-CREATE TABLE `franchises` (
-   `franchID` VARCHAR(3) NULL DEFAULT '',
-   `G` DECIMAL(32) NULL DEFAULT NULL,
-   `Ghome` DOUBLE NULL DEFAULT NULL,
-   `W` DECIMAL(32) NULL DEFAULT NULL,
-   `L` DECIMAL(32) NULL DEFAULT NULL,
-   `DivWin` DECIMAL(23) NULL DEFAULT NULL,
-   `LgWin` DECIMAL(23) NULL DEFAULT NULL,
-   `WSWin` DECIMAL(23) NULL DEFAULT NULL,
-   `WCWin` DECIMAL(23) NULL DEFAULT NULL,
-   `R` DECIMAL(32) NULL DEFAULT NULL,
-   `AB` DECIMAL(32) NULL DEFAULT NULL,
-   `H` DECIMAL(32) NULL DEFAULT NULL,
-   `2B` DECIMAL(32) NULL DEFAULT NULL,
-   `3B` DECIMAL(32) NULL DEFAULT NULL,
-   `HR` DECIMAL(32) NULL DEFAULT NULL,
-   `BB` DECIMAL(32) NULL DEFAULT NULL,
-   `SO` DECIMAL(32) NULL DEFAULT NULL,
-   `SB` DECIMAL(32) NULL DEFAULT NULL,
-   `CS` DECIMAL(32) NULL DEFAULT NULL,
-   `HBP` DECIMAL(32) NULL DEFAULT NULL,
-   `SF` DECIMAL(32) NULL DEFAULT NULL,
-   `RA` DECIMAL(32) NULL DEFAULT NULL,
-   `ER` DECIMAL(32) NULL DEFAULT NULL,
-   `CG` DECIMAL(32) NULL DEFAULT NULL,
-   `SHO` DECIMAL(32) NULL DEFAULT NULL,
-   `SV` DECIMAL(32) NULL DEFAULT NULL,
-   `IPouts` DECIMAL(32) NULL DEFAULT NULL,
-   `E` DECIMAL(32) NULL DEFAULT NULL,
-   `DB` DECIMAL(32) NULL DEFAULT NULL,
-   `attendance` DECIMAL(32) NULL DEFAULT NULL
-) ENGINE=MyISAM;
-
-
-
-# Dump of table guts
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `guts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `guts` (
   `yearId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `woba` decimal(5,3) unsigned DEFAULT NULL,
@@ -437,82 +501,101 @@ CREATE TABLE `guts` (
   `cFIP` decimal(5,3) unsigned DEFAULT NULL,
   PRIMARY KEY (`yearId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table data was exported from FanGraphs “guts” table: http://www.fangraphs.com/guts.aspx?type=cn';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `halloffame`
+--
 
-
-# Dump of table halloffame
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `halloffame`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `halloffame` (
-  `playerID` varchar(10) DEFAULT '',
-  `yearid` int(11) DEFAULT NULL,
-  `votedBy` varchar(64) DEFAULT '',
+  `playerID` varchar(10) NOT NULL DEFAULT '',
+  `yearid` int(11) NOT NULL DEFAULT '0',
+  `votedBy` varchar(64) NOT NULL DEFAULT '',
   `ballots` int(11) DEFAULT NULL,
   `needed` int(11) DEFAULT NULL,
   `votes` int(11) DEFAULT NULL,
   `inducted` varchar(1) DEFAULT '',
   `category` varchar(20) DEFAULT '',
-  `needed_note` text
+  `needed_note` text,
+  PRIMARY KEY (`playerID`,`yearid`,`votedBy`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `homegames`
+--
 
-
-# Dump of table homegames
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `homegames`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `homegames` (
-  `year.key` int(11) DEFAULT NULL,
+  `year.key` int(11) NOT NULL DEFAULT '0',
   `league.key` char(2) DEFAULT '',
-  `team.key` char(3) DEFAULT '',
-  `park.key` char(5) DEFAULT '',
+  `team.key` char(3) NOT NULL DEFAULT '',
+  `park.key` char(5) NOT NULL DEFAULT '',
   `span.first` text,
   `span.last` text,
   `games` int(11) DEFAULT NULL,
   `openings` int(11) DEFAULT NULL,
-  `attendance` int(11) DEFAULT NULL
+  `attendance` int(11) DEFAULT NULL,
+  PRIMARY KEY (`year.key`,`team.key`,`park.key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `managers`
+--
 
-
-# Dump of table managers
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `managers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `managers` (
-  `playerID` varchar(10) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `teamID` varchar(3) DEFAULT '',
+  `playerID` varchar(10) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `teamID` varchar(3) NOT NULL DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
-  `inseason` int(11) DEFAULT NULL,
+  `inseason` int(11) NOT NULL DEFAULT '0',
   `G` int(11) DEFAULT NULL,
   `W` int(11) DEFAULT NULL,
   `L` int(11) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
-  `plyrMgr` char(1) DEFAULT ''
+  `plyrMgr` char(1) DEFAULT '',
+  PRIMARY KEY (`playerID`,`yearID`,`teamID`,`inseason`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `managershalf`
+--
 
-
-# Dump of table managershalf
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `managershalf`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `managershalf` (
-  `playerID` varchar(10) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `teamID` varchar(3) DEFAULT '',
+  `playerID` varchar(10) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `teamID` varchar(3) NOT NULL DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
-  `inseason` int(11) DEFAULT NULL,
-  `half` int(11) DEFAULT NULL,
+  `inseason` int(11) NOT NULL DEFAULT '0',
+  `half` int(11) NOT NULL DEFAULT '0',
   `G` int(11) DEFAULT NULL,
   `W` int(11) DEFAULT NULL,
   `L` int(11) DEFAULT NULL,
-  `rank` int(11) DEFAULT NULL
+  `rank` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`teamID`,`inseason`,`half`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `master`
+--
 
-
-# Dump of table master
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `master` (
   `playerID` varchar(10) NOT NULL DEFAULT '',
   `birthYear` int(11) DEFAULT NULL,
@@ -540,26 +623,33 @@ CREATE TABLE `master` (
   `bbrefID` varchar(9) DEFAULT '',
   PRIMARY KEY (`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `parks`
+--
 
-
-# Dump of table parks
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `parks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `parks` (
-  `park.key` char(5) DEFAULT '',
+  `park.key` char(5) NOT NULL DEFAULT '',
   `park.name` varchar(255) DEFAULT '',
   `park.alias` varchar(255) DEFAULT '',
   `city` varchar(50) DEFAULT '',
   `state` char(2) DEFAULT '',
-  `country` varchar(50) DEFAULT ''
+  `country` varchar(50) DEFAULT '',
+  PRIMARY KEY (`park.key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `pitching`
+--
 
-
-# Dump of table pitching
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `pitching`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pitching` (
   `playerID` varchar(9) NOT NULL DEFAULT '',
   `yearID` int(11) NOT NULL,
@@ -593,48 +683,55 @@ CREATE TABLE `pitching` (
   `GIDP` int(11) DEFAULT NULL,
   PRIMARY KEY (`playerID`,`yearID`,`stint`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Temporary table structure for view `pitchingcareer`
+--
 
+DROP TABLE IF EXISTS `pitchingcareer`;
+/*!50001 DROP VIEW IF EXISTS `pitchingcareer`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `pitchingcareer` (
+  `playerID` tinyint NOT NULL,
+  `W` tinyint NOT NULL,
+  `L` tinyint NOT NULL,
+  `G` tinyint NOT NULL,
+  `GS` tinyint NOT NULL,
+  `CG` tinyint NOT NULL,
+  `SHO` tinyint NOT NULL,
+  `SV` tinyint NOT NULL,
+  `IPouts` tinyint NOT NULL,
+  `H` tinyint NOT NULL,
+  `ER` tinyint NOT NULL,
+  `HR` tinyint NOT NULL,
+  `BB` tinyint NOT NULL,
+  `SO` tinyint NOT NULL,
+  `IBB` tinyint NOT NULL,
+  `WP` tinyint NOT NULL,
+  `HBP` tinyint NOT NULL,
+  `BK` tinyint NOT NULL,
+  `BFP` tinyint NOT NULL,
+  `GF` tinyint NOT NULL,
+  `R` tinyint NOT NULL,
+  `SH` tinyint NOT NULL,
+  `SF` tinyint NOT NULL,
+  `GIDP` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dump of table pitchingcareer
-# ------------------------------------------------------------
+--
+-- Table structure for table `pitchingpost`
+--
 
-CREATE TABLE `pitchingcareer` (
-   `playerID` VARCHAR(9) NOT NULL DEFAULT '',
-   `W` DECIMAL(32) NULL DEFAULT NULL,
-   `L` DECIMAL(32) NULL DEFAULT NULL,
-   `G` DECIMAL(32) NULL DEFAULT NULL,
-   `GS` DECIMAL(32) NULL DEFAULT NULL,
-   `CG` DECIMAL(32) NULL DEFAULT NULL,
-   `SHO` DECIMAL(32) NULL DEFAULT NULL,
-   `SV` DECIMAL(32) NULL DEFAULT NULL,
-   `IPouts` DECIMAL(32) NULL DEFAULT NULL,
-   `H` DECIMAL(32) NULL DEFAULT NULL,
-   `ER` DECIMAL(32) NULL DEFAULT NULL,
-   `HR` DECIMAL(32) NULL DEFAULT NULL,
-   `BB` DECIMAL(32) NULL DEFAULT NULL,
-   `SO` DECIMAL(32) NULL DEFAULT NULL,
-   `IBB` DECIMAL(32) NULL DEFAULT NULL,
-   `WP` DECIMAL(32) NULL DEFAULT NULL,
-   `HBP` DECIMAL(32) NULL DEFAULT NULL,
-   `BK` DECIMAL(32) NULL DEFAULT NULL,
-   `BFP` DECIMAL(32) NULL DEFAULT NULL,
-   `GF` DECIMAL(32) NULL DEFAULT NULL,
-   `R` DECIMAL(32) NULL DEFAULT NULL,
-   `SH` DECIMAL(32) NULL DEFAULT NULL,
-   `SF` DECIMAL(32) NULL DEFAULT NULL,
-   `GIDP` DECIMAL(32) NULL DEFAULT NULL
-) ENGINE=MyISAM;
-
-
-
-# Dump of table pitchingpost
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `pitchingpost`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pitchingpost` (
-  `playerID` varchar(9) DEFAULT '',
-  `yearID` int(11) DEFAULT NULL,
-  `round` varchar(10) DEFAULT '',
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `round` varchar(10) NOT NULL DEFAULT '',
   `teamID` varchar(3) DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
   `W` int(11) DEFAULT NULL,
@@ -661,61 +758,77 @@ CREATE TABLE `pitchingpost` (
   `R` int(11) DEFAULT NULL,
   `SH` int(11) DEFAULT NULL,
   `SF` int(11) DEFAULT NULL,
-  `GIDP` text
+  `GIDP` text,
+  PRIMARY KEY (`playerID`,`yearID`,`round`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `salaries`
+--
 
-
-# Dump of table salaries
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `salaries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `salaries` (
-  `yearID` int(11) DEFAULT NULL,
-  `teamID` varchar(3) DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `teamID` varchar(3) NOT NULL DEFAULT '',
   `lgID` varchar(2) DEFAULT '',
-  `playerID` varchar(9) DEFAULT '',
-  `salary` int(11) DEFAULT NULL
+  `playerID` varchar(9) NOT NULL DEFAULT '',
+  `salary` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerID`,`yearID`,`teamID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `schools`
+--
 
-
-# Dump of table schools
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `schools`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schools` (
-  `schoolID` varchar(15) DEFAULT '',
+  `schoolID` varchar(15) NOT NULL DEFAULT '',
   `name_full` varchar(255) DEFAULT '',
   `city` varchar(55) DEFAULT '',
   `state` varchar(55) DEFAULT '',
-  `country` varchar(55) DEFAULT ''
+  `country` varchar(55) DEFAULT '',
+  PRIMARY KEY (`schoolID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `seriespost`
+--
 
-
-# Dump of table seriespost
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `seriespost`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seriespost` (
-  `yearID` int(11) DEFAULT NULL,
-  `round` varchar(5) DEFAULT '',
-  `teamIDwinner` varchar(3) DEFAULT '',
-  `lgIDwinner` varchar(2) DEFAULT '',
-  `teamIDloser` varchar(3) DEFAULT '',
-  `lgIDloser` varchar(2) DEFAULT '',
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `round` varchar(5) NOT NULL DEFAULT '',
+  `teamIDwinner` varchar(3) NOT NULL DEFAULT '',
+  `lgIDwinner` varchar(2) NOT NULL DEFAULT '',
+  `teamIDloser` varchar(3) NOT NULL DEFAULT '',
+  `lgIDloser` varchar(2) NOT NULL DEFAULT '',
   `wins` int(11) DEFAULT NULL,
   `losses` int(11) DEFAULT NULL,
-  `ties` int(11) DEFAULT NULL
+  `ties` int(11) DEFAULT NULL,
+  PRIMARY KEY (`yearID`,`round`,`teamIDwinner`,`lgIDwinner`,`teamIDloser`,`lgIDloser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `teams`
+--
 
-
-# Dump of table teams
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams` (
-  `yearID` int(11) DEFAULT NULL,
+  `yearID` int(11) NOT NULL DEFAULT '0',
   `lgID` varchar(2) DEFAULT '',
-  `teamID` varchar(3) DEFAULT '',
+  `teamID` varchar(3) NOT NULL DEFAULT '',
   `franchID` varchar(3) DEFAULT '',
   `divID` char(1) DEFAULT '',
   `Rank` int(11) DEFAULT NULL,
@@ -760,112 +873,161 @@ CREATE TABLE `teams` (
   `PPF` int(11) DEFAULT NULL,
   `teamIDBR` varchar(3) DEFAULT '',
   `teamIDlahman45` varchar(3) DEFAULT '',
-  `teamIDretro` varchar(3) DEFAULT ''
+  `teamIDretro` varchar(3) DEFAULT '',
+  PRIMARY KEY (`teamID`,`yearID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `teamsfranchises`
+--
 
-
-# Dump of table teamsfranchises
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `teamsfranchises`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teamsfranchises` (
-  `franchID` varchar(3) DEFAULT '',
+  `franchID` varchar(3) NOT NULL DEFAULT '',
   `franchName` varchar(50) DEFAULT '',
   `active` varchar(2) DEFAULT '',
-  `NAassoc` varchar(3) DEFAULT ''
+  `NAassoc` varchar(3) DEFAULT '',
+  PRIMARY KEY (`franchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `teamshalf`
+--
 
-
-# Dump of table teamshalf
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `teamshalf`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teamshalf` (
-  `yearID` int(11) DEFAULT NULL,
-  `lgID` varchar(2) DEFAULT '',
-  `teamID` varchar(3) DEFAULT '',
-  `Half` int(11) DEFAULT NULL,
+  `yearID` int(11) NOT NULL DEFAULT '0',
+  `lgID` varchar(2) NOT NULL DEFAULT '',
+  `teamID` varchar(3) NOT NULL DEFAULT '',
+  `Half` int(11) NOT NULL DEFAULT '0',
   `divID` char(1) DEFAULT '',
   `DivWin` char(1) DEFAULT '',
   `Rank` int(11) DEFAULT NULL,
   `G` int(11) DEFAULT NULL,
   `W` int(11) DEFAULT NULL,
-  `L` int(11) DEFAULT NULL
+  `L` int(11) DEFAULT NULL,
+  PRIMARY KEY (`teamID`,`yearID`,`lgID`,`Half`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Final view structure for view `battingcareer`
+--
+
+/*!50001 DROP TABLE IF EXISTS `battingcareer`*/;
+/*!50001 DROP VIEW IF EXISTS `battingcareer`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `battingcareer` AS select `batting`.`playerID` AS `playerID`,sum(`batting`.`G`) AS `G`,(((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + coalesce(sum(`batting`.`IBB`),0)) + coalesce(sum(`batting`.`HBP`),0)) + coalesce(sum(`batting`.`SH`),0)) + coalesce(sum(`batting`.`SF`),0)) AS `PA`,sum(`batting`.`AB`) AS `AB`,sum(`batting`.`R`) AS `R`,sum(`batting`.`H`) AS `H`,(((sum(`batting`.`H`) - sum(`batting`.`2B`)) - sum(`batting`.`3B`)) - sum(`batting`.`HR`)) AS `1B`,sum(`batting`.`2B`) AS `2B`,sum(`batting`.`3B`) AS `3B`,sum(`batting`.`HR`) AS `HR`,sum(`batting`.`RBI`) AS `RBI`,sum(`batting`.`SB`) AS `SB`,sum(`batting`.`CS`) AS `CS`,sum(`batting`.`BB`) AS `BB`,sum(`batting`.`SO`) AS `SO`,sum(`batting`.`IBB`) AS `IBB`,sum(`batting`.`HBP`) AS `HBP`,sum(`batting`.`SH`) AS `SH`,sum(`batting`.`SF`) AS `SF`,sum(`batting`.`GIDP`) AS `GIDP` from `batting` group by `batting`.`playerID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `battingleague`
+--
+
+/*!50001 DROP TABLE IF EXISTS `battingleague`*/;
+/*!50001 DROP VIEW IF EXISTS `battingleague`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `battingleague` AS select `batting`.`lgID` AS `lgID`,`batting`.`yearID` AS `yearID`,sum(`batting`.`AB`) AS `AB`,sum(`batting`.`R`) AS `R`,sum(`batting`.`H`) AS `H`,sum(`batting`.`2B`) AS `2B`,sum(`batting`.`3B`) AS `3B`,sum(`batting`.`HR`) AS `HR`,sum(`batting`.`RBI`) AS `RBI`,sum(coalesce(`batting`.`SB`,0)) AS `SB`,sum(coalesce(`batting`.`CS`,0)) AS `CS`,sum(`batting`.`BB`) AS `BB`,sum(coalesce(`batting`.`SO`,0)) AS `SO`,sum(coalesce(`batting`.`IBB`,0)) AS `IBB`,sum(coalesce(`batting`.`HBP`,0)) AS `HBP`,sum(coalesce(`batting`.`SH`,0)) AS `SH`,sum(coalesce(`batting`.`SF`,0)) AS `SF`,sum(coalesce(`batting`.`GIDP`,0)) AS `GIDP` from `batting` group by `batting`.`lgID`,`batting`.`yearID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `battingmlbperyear`
+--
+
+/*!50001 DROP TABLE IF EXISTS `battingmlbperyear`*/;
+/*!50001 DROP VIEW IF EXISTS `battingmlbperyear`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `battingmlbperyear` AS select `batting`.`yearID` AS `yearID`,sum(`batting`.`AB`) AS `AB`,sum(`batting`.`R`) AS `R`,sum(`batting`.`H`) AS `H`,sum(`batting`.`2B`) AS `2B`,sum(`batting`.`3B`) AS `3B`,sum(`batting`.`HR`) AS `HR`,sum(`batting`.`RBI`) AS `RBI`,sum(coalesce(`batting`.`SB`,0)) AS `SB`,sum(coalesce(`batting`.`CS`,0)) AS `CS`,sum(`batting`.`BB`) AS `BB`,sum(coalesce(`batting`.`SO`,0)) AS `SO`,sum(coalesce(`batting`.`IBB`,0)) AS `IBB`,sum(coalesce(`batting`.`HBP`,0)) AS `HBP`,sum(coalesce(`batting`.`SH`,0)) AS `SH`,sum(coalesce(`batting`.`SF`,0)) AS `SF`,sum(coalesce(`batting`.`GIDP`,0)) AS `GIDP` from `batting` group by `batting`.`yearID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `battingperpamlbperyear`
+--
+
+/*!50001 DROP TABLE IF EXISTS `battingperpamlbperyear`*/;
+/*!50001 DROP VIEW IF EXISTS `battingperpamlbperyear`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `battingperpamlbperyear` AS select `batting`.`yearID` AS `yearid`,(((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`)) AS `pa`,sum(`batting`.`AB`) AS `ab`,sum(`batting`.`H`) AS `h`,((((sum(`batting`.`H`) - sum(`batting`.`2B`)) - sum(`batting`.`3B`)) - sum(`batting`.`HR`)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `1b`,(sum(`batting`.`2B`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `2b`,(sum(`batting`.`3B`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `3b`,(sum(`batting`.`HR`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `hr`,(sum(coalesce(`batting`.`SB`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `sb`,(sum(coalesce(`batting`.`CS`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `cs`,(sum(`batting`.`BB`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `bb`,(sum(coalesce(`batting`.`SO`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `so`,(sum(coalesce(`batting`.`IBB`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `ibb`,(sum(coalesce(`batting`.`HBP`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `hbp`,(sum(coalesce(`batting`.`SH`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `sh`,(sum(coalesce(`batting`.`SF`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `sf`,(sum(coalesce(`batting`.`GIDP`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `gidp` from `batting` group by `batting`.`yearID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `franchises`
+--
+
+/*!50001 DROP TABLE IF EXISTS `franchises`*/;
+/*!50001 DROP VIEW IF EXISTS `franchises`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `franchises` AS select `teams`.`franchID` AS `franchID`,sum(`teams`.`G`) AS `G`,sum(coalesce(`teams`.`Ghome`,0)) AS `Ghome`,sum(`teams`.`W`) AS `W`,sum(`teams`.`L`) AS `L`,sum(if((coalesce(`teams`.`DivWin`,'N') = 'Y'),1,0)) AS `DivWin`,sum(if((coalesce(`teams`.`LgWin`,'N') = 'Y'),1,0)) AS `LgWin`,sum(if((coalesce(`teams`.`WSWin`,'N') = 'Y'),1,0)) AS `WSWin`,sum(if((coalesce(`teams`.`WCWin`,'N') = 'Y'),1,0)) AS `WCWin`,sum(`teams`.`R`) AS `R`,sum(`teams`.`AB`) AS `AB`,sum(`teams`.`H`) AS `H`,sum(`teams`.`2B`) AS `2B`,sum(`teams`.`3B`) AS `3B`,sum(`teams`.`HR`) AS `HR`,sum(`teams`.`BB`) AS `BB`,sum(`teams`.`SO`) AS `SO`,sum(coalesce(`teams`.`SB`,0)) AS `SB`,sum(coalesce(`teams`.`CS`,0)) AS `CS`,sum(coalesce(`teams`.`HBP`,0)) AS `HBP`,sum(coalesce(`teams`.`SF`,0)) AS `SF`,sum(`teams`.`RA`) AS `RA`,sum(`teams`.`ER`) AS `ER`,sum(`teams`.`CG`) AS `CG`,sum(`teams`.`SHO`) AS `SHO`,sum(`teams`.`SV`) AS `SV`,sum(`teams`.`IPouts`) AS `IPouts`,sum(`teams`.`E`) AS `E`,sum(coalesce(`teams`.`DP`,0)) AS `DB`,sum(coalesce(`teams`.`attendance`,0)) AS `attendance` from `teams` group by `teams`.`franchID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `pitchingcareer`
+--
+
+/*!50001 DROP TABLE IF EXISTS `pitchingcareer`*/;
+/*!50001 DROP VIEW IF EXISTS `pitchingcareer`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `pitchingcareer` AS select `pitching`.`playerID` AS `playerID`,sum(`pitching`.`W`) AS `W`,sum(`pitching`.`L`) AS `L`,sum(`pitching`.`G`) AS `G`,sum(`pitching`.`GS`) AS `GS`,sum(`pitching`.`CG`) AS `CG`,sum(`pitching`.`SHO`) AS `SHO`,sum(`pitching`.`SV`) AS `SV`,sum(`pitching`.`IPouts`) AS `IPouts`,sum(`pitching`.`H`) AS `H`,sum(`pitching`.`ER`) AS `ER`,sum(`pitching`.`HR`) AS `HR`,sum(`pitching`.`BB`) AS `BB`,sum(`pitching`.`SO`) AS `SO`,sum(`pitching`.`IBB`) AS `IBB`,sum(`pitching`.`WP`) AS `WP`,sum(`pitching`.`HBP`) AS `HBP`,sum(`pitching`.`BK`) AS `BK`,sum(`pitching`.`BFP`) AS `BFP`,sum(`pitching`.`GF`) AS `GF`,sum(`pitching`.`R`) AS `R`,sum(`pitching`.`SH`) AS `SH`,sum(`pitching`.`SF`) AS `SF`,sum(`pitching`.`GIDP`) AS `GIDP` from `pitching` group by `pitching`.`playerID` order by sum(`pitching`.`W`) desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
 
-
-
-
-# Replace placeholder table for battingmlbperyear with correct view syntax
-# ------------------------------------------------------------
-
-DROP TABLE `battingmlbperyear`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `battingmlbperyear`
-AS SELECT
-   `batting`.`yearID` AS `yearID`,sum(`batting`.`AB`) AS `AB`,sum(`batting`.`R`) AS `R`,sum(`batting`.`H`) AS `H`,sum(`batting`.`2B`) AS `2B`,sum(`batting`.`3B`) AS `3B`,sum(`batting`.`HR`) AS `HR`,sum(`batting`.`RBI`) AS `RBI`,sum(coalesce(`batting`.`SB`,0)) AS `SB`,sum(coalesce(`batting`.`CS`,0)) AS `CS`,sum(`batting`.`BB`) AS `BB`,sum(coalesce(`batting`.`SO`,0)) AS `SO`,sum(coalesce(`batting`.`IBB`,0)) AS `IBB`,sum(coalesce(`batting`.`HBP`,0)) AS `HBP`,sum(coalesce(`batting`.`SH`,0)) AS `SH`,sum(coalesce(`batting`.`SF`,0)) AS `SF`,sum(coalesce(`batting`.`GIDP`,0)) AS `GIDP`
-FROM `batting` group by `batting`.`yearID`;
-
-
-# Replace placeholder table for pitchingcareer with correct view syntax
-# ------------------------------------------------------------
-
-DROP TABLE `pitchingcareer`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pitchingcareer`
-AS SELECT
-   `pitching`.`playerID` AS `playerID`,sum(`pitching`.`W`) AS `W`,sum(`pitching`.`L`) AS `L`,sum(`pitching`.`G`) AS `G`,sum(`pitching`.`GS`) AS `GS`,sum(`pitching`.`CG`) AS `CG`,sum(`pitching`.`SHO`) AS `SHO`,sum(`pitching`.`SV`) AS `SV`,sum(`pitching`.`IPouts`) AS `IPouts`,sum(`pitching`.`H`) AS `H`,sum(`pitching`.`ER`) AS `ER`,sum(`pitching`.`HR`) AS `HR`,sum(`pitching`.`BB`) AS `BB`,sum(`pitching`.`SO`) AS `SO`,sum(`pitching`.`IBB`) AS `IBB`,sum(`pitching`.`WP`) AS `WP`,sum(`pitching`.`HBP`) AS `HBP`,sum(`pitching`.`BK`) AS `BK`,sum(`pitching`.`BFP`) AS `BFP`,sum(`pitching`.`GF`) AS `GF`,sum(`pitching`.`R`) AS `R`,sum(`pitching`.`SH`) AS `SH`,sum(`pitching`.`SF`) AS `SF`,sum(`pitching`.`GIDP`) AS `GIDP`
-FROM `pitching` group by `pitching`.`playerID` order by sum(`pitching`.`W`) desc;
-
-
-# Replace placeholder table for battingcareer with correct view syntax
-# ------------------------------------------------------------
-
-DROP TABLE `battingcareer`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `battingcareer`
-AS SELECT
-   `batting`.`playerID` AS `playerID`,sum(`batting`.`G`) AS `G`,(((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + coalesce(sum(`batting`.`IBB`),0)) + coalesce(sum(`batting`.`HBP`),0)) + coalesce(sum(`batting`.`SH`),0)) + coalesce(sum(`batting`.`SF`),0)) AS `PA`,sum(`batting`.`AB`) AS `AB`,sum(`batting`.`R`) AS `R`,sum(`batting`.`H`) AS `H`,(((sum(`batting`.`H`) - sum(`batting`.`2B`)) - sum(`batting`.`3B`)) - sum(`batting`.`HR`)) AS `1B`,sum(`batting`.`2B`) AS `2B`,sum(`batting`.`3B`) AS `3B`,sum(`batting`.`HR`) AS `HR`,sum(`batting`.`RBI`) AS `RBI`,sum(`batting`.`SB`) AS `SB`,sum(`batting`.`CS`) AS `CS`,sum(`batting`.`BB`) AS `BB`,sum(`batting`.`SO`) AS `SO`,sum(`batting`.`IBB`) AS `IBB`,sum(`batting`.`HBP`) AS `HBP`,sum(`batting`.`SH`) AS `SH`,sum(`batting`.`SF`) AS `SF`,sum(`batting`.`GIDP`) AS `GIDP`
-FROM `batting` group by `batting`.`playerID`;
-
-
-# Replace placeholder table for battingperpamlbperyear with correct view syntax
-# ------------------------------------------------------------
-
-DROP TABLE `battingperpamlbperyear`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `battingperpamlbperyear`
-AS SELECT
-   `batting`.`yearID` AS `yearid`,(((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`)) AS `pa`,sum(`batting`.`AB`) AS `ab`,sum(`batting`.`H`) AS `h`,((((sum(`batting`.`H`) - sum(`batting`.`2B`)) - sum(`batting`.`3B`)) - sum(`batting`.`HR`)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `1b`,(sum(`batting`.`2B`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `2b`,(sum(`batting`.`3B`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `3b`,(sum(`batting`.`HR`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `hr`,(sum(coalesce(`batting`.`SB`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `sb`,(sum(coalesce(`batting`.`CS`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `cs`,(sum(`batting`.`BB`) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `bb`,(sum(coalesce(`batting`.`SO`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `so`,(sum(coalesce(`batting`.`IBB`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `ibb`,(sum(coalesce(`batting`.`HBP`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `hbp`,(sum(coalesce(`batting`.`SH`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `sh`,(sum(coalesce(`batting`.`SF`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `sf`,(sum(coalesce(`batting`.`GIDP`,0)) / (((((sum(`batting`.`AB`) + sum(`batting`.`BB`)) + sum(`batting`.`IBB`)) + sum(`batting`.`HBP`)) + sum(`batting`.`SH`)) + sum(`batting`.`SF`))) AS `gidp`
-FROM `batting` group by `batting`.`yearID`;
-
-
-# Replace placeholder table for battingleague with correct view syntax
-# ------------------------------------------------------------
-
-DROP TABLE `battingleague`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `battingleague`
-AS SELECT
-   `batting`.`lgID` AS `lgID`,
-   `batting`.`yearID` AS `yearID`,sum(`batting`.`AB`) AS `AB`,sum(`batting`.`R`) AS `R`,sum(`batting`.`H`) AS `H`,sum(`batting`.`2B`) AS `2B`,sum(`batting`.`3B`) AS `3B`,sum(`batting`.`HR`) AS `HR`,sum(`batting`.`RBI`) AS `RBI`,sum(coalesce(`batting`.`SB`,0)) AS `SB`,sum(coalesce(`batting`.`CS`,0)) AS `CS`,sum(`batting`.`BB`) AS `BB`,sum(coalesce(`batting`.`SO`,0)) AS `SO`,sum(coalesce(`batting`.`IBB`,0)) AS `IBB`,sum(coalesce(`batting`.`HBP`,0)) AS `HBP`,sum(coalesce(`batting`.`SH`,0)) AS `SH`,sum(coalesce(`batting`.`SF`,0)) AS `SF`,sum(coalesce(`batting`.`GIDP`,0)) AS `GIDP`
-FROM `batting` group by `batting`.`lgID`,`batting`.`yearID`;
-
-
-# Replace placeholder table for franchises with correct view syntax
-# ------------------------------------------------------------
-
-DROP TABLE `franchises`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `franchises`
-AS SELECT
-   `teams`.`franchID` AS `franchID`,sum(`teams`.`G`) AS `G`,sum(coalesce(`teams`.`Ghome`,0)) AS `Ghome`,sum(`teams`.`W`) AS `W`,sum(`teams`.`L`) AS `L`,sum(if((coalesce(`teams`.`DivWin`,'N') = 'Y'),1,0)) AS `DivWin`,sum(if((coalesce(`teams`.`LgWin`,'N') = 'Y'),1,0)) AS `LgWin`,sum(if((coalesce(`teams`.`WSWin`,'N') = 'Y'),1,0)) AS `WSWin`,sum(if((coalesce(`teams`.`WCWin`,'N') = 'Y'),1,0)) AS `WCWin`,sum(`teams`.`R`) AS `R`,sum(`teams`.`AB`) AS `AB`,sum(`teams`.`H`) AS `H`,sum(`teams`.`2B`) AS `2B`,sum(`teams`.`3B`) AS `3B`,sum(`teams`.`HR`) AS `HR`,sum(`teams`.`BB`) AS `BB`,sum(`teams`.`SO`) AS `SO`,sum(coalesce(`teams`.`SB`,0)) AS `SB`,sum(coalesce(`teams`.`CS`,0)) AS `CS`,sum(coalesce(`teams`.`HBP`,0)) AS `HBP`,sum(coalesce(`teams`.`SF`,0)) AS `SF`,sum(`teams`.`RA`) AS `RA`,sum(`teams`.`ER`) AS `ER`,sum(`teams`.`CG`) AS `CG`,sum(`teams`.`SHO`) AS `SHO`,sum(`teams`.`SV`) AS `SV`,sum(`teams`.`IPouts`) AS `IPouts`,sum(`teams`.`E`) AS `E`,sum(coalesce(`teams`.`DP`,0)) AS `DB`,sum(coalesce(`teams`.`attendance`,0)) AS `attendance`
-FROM `teams` group by `teams`.`franchID`;
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
