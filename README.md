@@ -1,3 +1,9 @@
+MOVED TO [https://gitlab.com/jasonmm/baseball-stats-db/](https://gitlab.com/jasonmm/baseball-stats-db/).
+
+This repository is no longer updated.
+
+------
+
 Description
 -----------
 Creates a database from BaseballDatabank data.
